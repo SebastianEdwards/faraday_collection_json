@@ -10,11 +10,9 @@ service = Faraday.new do |builder|
 end
 
 collection = service.get('http://www.service.org/').body
-
-collection.href                   # => 'http://www.service.org/'
-
-link = collection.links.first
-
-link.rel                          # => 'feed'
-link.href                         # => 'http://www.service.org/feed.rss'
+collection.href                       # => 'http://www.service.org/'
+collection.links.first.tap do |link|
+  link.rel                            # => 'feed'
+  link.href                           # => 'http://www.service.org/feed.rss'
+end
 ```
